@@ -1,0 +1,210 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>JavaScript Exercises</title>  
+    <script>  
+        // 1
+        function variableScopes() {  
+            var varVariable = "I am a var variable"; 
+            let letVariable = "I am a let variable"; 
+            const constVariable = "I am a const variable"; 
+            
+            return `var: ${varVariable}, let: ${letVariable}, const: ${constVariable}`;  
+        }  
+        console.log(variableScopes());  
+
+        // 2
+        function createMultiplier(multiplier) {  
+            return function(number) {  
+                return number * multiplier;  
+            };  
+        }  
+        const double = createMultiplier(2);  
+        const triple = createMultiplier(3);  
+        console.log(double(5)); // 10  
+        console.log(triple(5)); // 15  
+
+        // 3
+        function userInfo({ name = 'rabbiya', age, country = 'Unknown', city = 'Unknown' }) {  
+            return `Name: ${name}, Age: ${age}, Country: ${country}, City: ${city}`;  
+        }  
+        console.log(userInfo({ name: 'rabbiya', age: 20 }));  
+
+        // 4  
+        function calculateTotal(price, ...discounts) {  
+            return discounts.reduce((total, discount) => total - discount, price);  
+        }  
+        console.log(calculateTotal(100, 10, 5)); 
+
+        // 5
+        const calculator = {  
+            add: (a, b) => a + b,  
+            subtract: (a, b) => a - b  
+        };  
+        console.log(calculator.add(5, 3));
+        console.log(calculator.subtract(5, 3)); 
+
+        // 6 
+        const books = [  
+            { title: 'A Mountain And The Squirell', author: 'Allama Iqbal', yearPublished: 2001 },  
+            { title: 'Devan-E-Ghalib', author: 'Mirza Ghalib', yearPublished: 2002 }  
+        ];  
+        function logBooks(books) {  
+            for (const book of books) {  
+                console.log(`Title: ${book.title}, Author: ${book.author}, Year: ${book.yearPublished}`);  
+            }  
+        }  
+        logBooks(books);  
+
+        // 7 
+        function* idGenerator() {  
+            let id = 1;  
+            while (true) {  
+                yield id++;  
+            }  
+        }  
+        const idGen = idGenerator();  
+        console.log(idGen.next().value); // 1  
+        console.log(idGen.next().value); // 2  
+
+        // 8
+        const mathOperations = {  
+            add: (a, b) => a + b,  
+            subtract: (a, b) => a - b,  
+            multiply: (a, b) => a * b,  
+            divide: (a, b) => a / b  
+        };  
+        console.log(mathOperations.add(4, 2)); // 6  
+        console.log(mathOperations.subtract(4, 2)); // 2  
+        console.log(mathOperations.multiply(4, 2)); // 8  
+        console.log(mathOperations.divide(4, 2)); // 2  
+
+        // 9
+        const student = {  
+            name: 'rabbiya',  
+            age: 20,  
+            grade: 'A',  
+            subjects: ['Math', 'Science']  
+        };  
+        for (const key in student) {  
+            console.log(`${key}: ${student[key]}`);  
+        }  
+
+        // 10 
+        const numbers = [1, 2, 3, 4];  
+        const squaredNumbers = numbers.map(num => num ** 2);  
+        console.log('Original:', numbers);  
+        console.log('Squared:', squaredNumbers);  
+
+        // 11
+        function operate(a, b, callback) {  
+            return callback(a, b);  
+        }  
+        const add = (x, y) => x + y;  
+        const subtract = (x, y) => x - y;  
+        console.log(operate(5, 3, add)); // 8  
+        console.log(operate(5, 3, subtract)); // 2  
+
+        // 12
+        setTimeout(() => {  
+            console.log("Hello, World!");  
+        }, 3000);  
+
+        // 13
+        const intervalId = setInterval(() => {  
+            console.log(new Date().toLocaleTimeString());  
+        }, 2000);  
+        setTimeout(() => {  
+            clearInterval(intervalId);  
+        }, 10000);  
+
+        // 14
+        function fetchData() {  
+            return new Promise((resolve) => {  
+                setTimeout(() => {  
+                    resolve("Data received!");  
+                }, 2000);  
+            });  
+        }  
+        fetchData().then(console.log);  
+
+        // 15
+        async function fetchDataAsync() {  
+            const result = await fetchData();  
+            console.log(result);  
+        }  
+        fetchDataAsync();  
+
+        // 16
+        function power(base, exponent) {  
+            return base ** exponent;  
+        }  
+        console.log(power(2, 3)); // 8  
+
+        // 17 
+        class Animal {  
+            constructor(name, species) {  
+                this.name = name;  
+                this.species = species;  
+            }  
+
+            speak() {  
+                console.log(`${this.name} says ${this.getSound()}`);  
+            }  
+
+            getSound() {  
+                switch (this.species.toLowerCase()) {  
+                    case 'dog':  
+                        return 'Woof!';  
+                    case 'cat':  
+                        return 'Meow!';  
+                    case 'cow':  
+                        return 'Moo!';  
+                    default:  
+                        return 'Sound not defined';  
+                }  
+            }  
+        }  
+
+        const dog = new Animal('Dog', 'Dog');  
+        const cat = new Animal('Cat', 'Cat');  
+        const cow = new Animal('Cow', 'Cow');  
+        
+        dog.speak();  
+        cat.speak();  
+        cow.speak(); 
+
+        // 18
+        function checkEvenOdd(number) {  
+            return number % 2 === 0 ? 'Even' : 'Odd';  
+        }  
+        console.log(checkEvenOdd(10));  
+        console.log(checkEvenOdd(7));
+
+        // 19
+        const user = {  
+            name: 'Rabbiya',  
+            address: {  
+                city: 'Karachi',  
+            },  
+        };  
+
+        function logCityName(user) {  
+            console.log(user.address?.city ?? 'City not available');  
+        }  
+        logCityName(user);
+
+        const userWithoutCity = {  
+            name: 'Rabbiya',  
+            address: {},  
+        };  
+
+        logCityName(userWithoutCity); 
+    </script>  
+</head>  
+<body>  
+    <h2>Javascript ES6 Question For Solution Open Console</h2>
+</body>  
+</html>
